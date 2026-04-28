@@ -11,6 +11,7 @@ dependencies = [
 ]
 
 [project.scripts]
+diode = "diode.cli:main"
 
 [project.optional-dependencies]
 zephyr = ["west"]
