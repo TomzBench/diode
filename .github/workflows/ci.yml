@@ -1,0 +1,73 @@
+name: CI
+
+on:
+  push:
+    branches: [master]
+  pull_request:
+
+jobs:
+  e2e:
+    name: E2E (${{ matrix.os }})
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [ubuntu-latest, windows-latest]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: astral-sh/setup-uv@v4
+      - uses: ilammy/msvc-dev-cmd@v1
+        if: runner.os == 'Windows'
+      - run: uv sync
+
+      - name: Configure
+        run: uv run cmake -B build -S tests/e2e -G Ninja
+
+      - name: Build
+        run: cmake --build build
+
+      - name: Test
+        run: ctest --test-dir build --output-on-failure
+
+# ---------------------------------------------------------------------------
+# Future: docs job. Enable by extracting into .github/workflows/docs.yml when
+# sphinx + the docs/ tree are wired up. Mirrors jsmn-tools' setup.
+#
+# name: Docs
+# on:
+#   push:
+#     branches: [master]
+#   pull_request:
+#   release:
+#     types: [published]
+# concurrency:
+#   group: docs-${{ github.ref }}
+#   cancel-in-progress: true
+# jobs:
+#   build:
+#     name: Build
+#     runs-on: ubuntu-latest
+#     steps:
+#       - uses: actions/checkout@v4
+#       - uses: astral-sh/setup-uv@v4
+#       - run: uv sync --group docs
+#       - name: Sphinx build
+#         run: uv run sphinx-build -b html docs docs/_build/html
+#       - name: Upload Pages artifact
+#         if: github.event_name == 'release'
+#         uses: actions/upload-pages-artifact@v3
+#         with:
+#           path: docs/_build/html
+#   deploy:
+#     name: Deploy
+#     needs: build
+#     if: github.event_name == 'release'
+#     runs-on: ubuntu-latest
+#     environment:
+#       name: github-pages
+#       url: ${{ steps.deployment.outputs.page_url }}
+#     permissions:
+#       pages: write
+#       id-token: write
+#     steps:
+#       - id: deployment
+#         uses: actions/deploy-pages@v4
