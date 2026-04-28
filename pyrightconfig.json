@@ -1,0 +1,14 @@
+{
+  "include": ["diode/src", "diode/tests"],
+  "exclude": ["diode/tests/e2e", "**/node_modules", "**/.venv"],
+  "pythonVersion": "3.12",
+  "typeCheckingMode": "standard",
+  "reportMissingTypeStubs": false,
+  "reportUnknownMemberType": false,
+  "reportUnknownArgumentType": false,
+  "reportUnknownVariableType": false,
+  "reportUnknownParameterType": false,
+  "reportUnnecessaryIsInstance": "warning",
+  "reportUnnecessaryTypeIgnoreComment": "warning",
+  "reportUnnecessaryComparison": "warning"
+}

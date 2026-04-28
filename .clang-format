@@ -1,0 +1,14 @@
+BasedOnStyle: LLVM
+ColumnLimit: 80
+# Return type on its own line, brace on new line for functions
+BreakAfterReturnType: All
+BreakBeforeBraces: Linux
+BinPackParameters: false
+BinPackArguments: false
+AllowAllParametersOfDeclarationOnNextLine: false
+InsertBraces: true
+IndentWidth: 4
+AlignConsecutiveDeclarations:
+  Enabled: true
+  AcrossEmptyLines: false
+  AcrossComments: true

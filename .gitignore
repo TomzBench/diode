@@ -1,0 +1,63 @@
+# Dependencies
+node_modules/
+
+# Build outputs - TypeScript
+dist/
+*.tsbuildinfo
+
+# Build outputs - Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+eggs/
+*.egg-info/
+*.egg
+.installed.cfg
+pip-log.txt
+pip-delete-this-directory.txt
+
+# Build outputs - CMake
+CMakeCache.txt
+CMakeFiles/
+cmake_install.cmake
+compile_commands.json
+# Only ignore a Makefile at the repo root (in-source CMake build); leave
+# authored Makefiles in subdirs (examples/, etc.) tracked.
+/Makefile
+!**/CMakeLists.txt
+.cache
+
+# Virtual environments
+.venv/
+venv/
+ENV/
+
+# IDE / Editor
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Testing / Coverage
+coverage/
+.coverage
+htmlcov/
+.pytest_cache/
+
+# Sphinx
+docs/_build/
+
+# Claude
+.claude/
+
+# AI local artifacts (conversations, drafts with PII)
+docs/ai/local/
